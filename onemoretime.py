@@ -69,17 +69,6 @@ class FriendlyAnimal(Animal):  # дочка с особенностью хвос
             typefriendlyanimal.tail,
         )
 
-    def changeinfo(animalID):
-        if type(animal_dict[changeanimal]) == FriendlyAnimal:
-            animalID = changeanimal
-            animalcolor = input("Введите цвет животного: ")
-            animalplace = input("Введите место обитания животного: ")
-            animaltail = input("Введите длинну хвоста в см: ")
-            typefriendlyanimal = FriendlyAnimal(
-                changeanimal, animalcolor, animalplace, animaltail
-            )
-            animal_dict[changeanimal] = typefriendlyanimal
-
     def __repr__(self):
         FriendlyAnimal = type(self).__name__
         return (
@@ -111,17 +100,6 @@ class AgressiveAnimal(Animal):  # дочка с особенностью клы�
             typeagressiveanimal.place,
             typeagressiveanimal.fang,
         )
-
-    def changeinfo(animalID):
-        if type(animal_dict[changeanimal]) == AgressiveAnimal:
-            animalID = changeanimal
-            animalcolor = input("Введите цвет животного: ")
-            animalplace = input("Введите место обитания животного: ")
-            animalfang = input("Введите длинну клыков в см: ")
-            typeagressiveanimal = AgressiveAnimal(
-                changeanimal, animalcolor, animalplace, animalfang
-            )
-            animal_dict[changeanimal] = typeagressiveanimal
 
     def __repr__(self):
         AgressiveAnimal = type(self).__name__
@@ -178,6 +156,12 @@ while True:
 
     if kindofaction == 4:
         changeanimal = int(input("По какому ID будем вносить изменения?: "))
-        HomeAnimal.changeinfo(changeanimal)
-        FriendlyAnimal.changeinfo(changeanimal)
-        AgressiveAnimal.changeinfo(changeanimal)
+        if type(animal_dict[changeanimal]) == HomeAnimal:
+            HomeAnimal.askinfo()
+            del animal_dict[changeanimal]
+        elif type(animal_dict[changeanimal]) == FriendlyAnimal:
+            FriendlyAnimal.askinfo()
+            del animal_dict[changeanimal]
+        elif type(animal_dict[changeanimal]) == AgressiveAnimal:
+            AgressiveAnimal.askinfo()
+            del animal_dict[changeanimal]
